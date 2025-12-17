@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Nur Atipa ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-main: #ff4d6d;
+            --pink-gradient: linear-gradient(to left, #ff4d6d, #ff9e7d);
+        }
+
+        body {
+            margin: 0; padding: 0; font-family: 'Poppins', sans-serif;
+            background: #121212; color: white; text-align: center;
+            overflow-x: hidden; scroll-behavior: smooth;
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- INTRO ANIMASI --- */
+        #section-kado {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .gift-box { font-size: 100px; cursor: pointer; transition: 0.3s; filter: drop-shadow(0 0 15px rgba(255,77,109,0.3)); }
+        
+        .shake-gift { animation: shakeKado 0.4s ease-in-out; }
+        @keyframes shakeKado {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* --- HALAMAN UTAMA --- */
+        #main-page {
+            background: var(--pink-gradient);
+            min-height: 100vh;
+            position: relative; padding-bottom: 100px;
+        }
+
+        .header-text { padding: 60px 20px 20px; }
+        .header-text h1 { font-size: 2.2rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        .header-text p.small-wish { font-size: 0.9rem; margin-top: 5px; opacity: 0.9; }
+        .spacer { margin: 80px 0; } 
+        .header-text h2.memories-title { font-size: 1.8rem; font-weight: 800; }
+
+        /* --- FOTO POLAROID --- */
+        .photo-wrap {
+            position: relative; width: 100%; max-width: 500px;
+            height: 600px; margin: 20px auto;
+        }
+
+        .polaroid {
+            position: absolute; background: white; padding: 10px 10px 35px 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 180px;
+            cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .polaroid::before {
+            content: ""; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 25px; background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        .polaroid img { width: 100%; height: 180px; object-fit: cover; }
+
+        .img1 { top: 0; left: 5%; transform: rotate(-8deg); z-index: 4; }
+        .img2 { top: 40px; right: 5%; transform: rotate(10deg); z-index: 3; }
+        .img3 { top: 240px; left: 10%; transform: rotate(5deg); z-index: 2; }
+        .img4 { top: 280px; right: 8%; transform: rotate(-12deg); z-index: 1; }
+
+        .caption { 
+            color: #333; font-size: 0.75rem; margin-top: 10px; 
+            display: none; font-style: italic; font-weight: 600;
+        }
+
+        .shake { animation: shake 0.5s ease-in-out; }
+        @keyframes shake {
+            0%, 100% { transform: scale(1.05) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(-5deg); }
+            75% { transform: scale(1.05) rotate(5deg); }
+        }
+
+        /* --- BAGIAN KUE --- */
+        .cake-area {
+            width: 100%; 
+            margin-top: 50px;
+            padding-bottom: 80px;
+            background: transparent;
+            border: none;
+        }
+
+        .cake-container { position: relative; width: 200px; margin: 20px auto 30px; }
+        .candles { display: flex; justify-content: center; gap: 12px; margin-bottom: -5px; }
+        .candle { width: 8px; height: 35px; background: #ffd700; position: relative; border-radius: 2px; }
+        .flame { 
+            width: 10px; height: 16px; background: #ff4500; border-radius: 50%;
+            position: absolute; top: -18px; left: -1px;
+            box-shadow: 0 0 10px #ff4500; animation: flicker 0.1s infinite alternate;
+        }
+        @keyframes flicker { from { opacity: 0.8; } to { opacity: 1; } }
+
+        .cake-layer { width: 140px; height: 40px; background: #ff8fa3; border-radius: 8px 8px 0 0; margin: 0 auto; }
+        .cake-layer.mid { width: 170px; height: 35px; background: #bde0fe; border-radius: 0; }
+        .cake-layer.bot { width: 200px; height: 50px; background: #ffafbd; border-radius: 0 0 8px 8px; }
+
+        .btn-main {
+            background: white; color: var(--pink-main); border: none; padding: 15px 40px;
+            border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s;
+        }
+
+        /* --- SURAT --- */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999; display: none; }
+        #section-surat {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 85%; max-width: 380px; background: white; color: #333;
+            padding: 30px; border-radius: 25px; z-index: 1000; display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="hbd-music" loop>
+        <source src="lagu/kota ini tak sama tanpamu.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="section-kado">
+        <div class="gift-box" id="giftBox" onclick="handleKado()">🎁</div>
+        <p id="teks-kado">Klik kadonya untuk buka ❤️</p>
+    </div>
+
+    <div id="main-page" class="hidden">
+        <div class="header-text">
+            <h1>Happy Birthday!</h1>
+            <p class="small-wish">Semoga panjang umur</p>
+            <div class="spacer"></div>
+            <h2 class="memories-title">Kenangan Terindah Kita</h2>
+        </div>
+
+        <div class="photo-wrap">
+            <div class="polaroid img1" onclick="goyangFoto(this)">
+                <img src="foto/img1.jpg">
+                <p class="caption">Momen yang begitu indah ✨</p>
+            </div>
+            <div class="polaroid img2" onclick="goyangFoto(this)">
+                <img src="foto/img2.jpg">
+                <p class="caption">Senyum paling manis! ❤️</p>
+            </div>
+            <div class="polaroid img3" onclick="goyangFoto(this)">
+                <img src="foto/img3.jpg">
+                <p class="caption">Tak terlupakan.</p>
+            </div>
+            <div class="polaroid img4" onclick="goyangFoto(this)">
+                <img src="foto/img4.jpg">
+                <p class="caption">Selalu bahagia bersamamu.</p>
+            </div>
+        </div>
+
+        <div class="cake-area">
+            <h2 id="wish-text">Make a Wish Dulu! ✨</h2>
+            <div class="cake-container">
+                <div class="candles">
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                </div>
+                <div class="cake-layer"></div>
+                <div class="cake-layer mid"></div>
+                <div class="cake-layer bot"></div>
+            </div>
+            <button id="btn-action" class="btn-main" onclick="handleLilin()">Tiup Lilinnya Sekarang! 🕯️</button>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+    <div id="section-surat">
+        <h2 style="font-family: Georgia, serif; color: var(--pink-main);">Buat Nur Atipa ❤️</h2>
+        <p>Happy Birthday ya! 🎉 Gak kerasa banget hari ini kamu nambah usia. Aku seneng banget bisa ngerayain ini bareng kamu.</p>
+        <p>Semoga kamu makin bahagia, makin bersinar, dan semua wishlist kamu tahun ini checklist semua! ✨</p>
+        <h3 style="margin-top: 20px;">Happy Level Up! 🎂🚀</h3>
+        <a href="https://wa.me/6285603974452?text=Makasih%20sayang%20ucapannya!%20❤️" style="display: block; background: var(--pink-main); color: white; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 20px;">Simpan Suratnya ❤️</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        let clicks = 0;
+        const music = document.getElementById('hbd-music');
+
+        function handleKado() {
+            clicks++;
+            const gift = document.getElementById('giftBox');
+            const teks = document.getElementById('teks-kado');
+
+            gift.classList.remove('shake-gift');
+            void gift.offsetWidth; 
+            gift.classList.add('shake-gift');
+
+            if (clicks < 4) {
+                teks.innerText = `${4 - clicks} clicks lagi...`;
+            } else {
+                // Putar musik
+                music.play();
+
+                // Partikel Meriah
+                const count = 200;
+                const defaults = { origin: { y: 0.7 } };
+                function fire(particleRatio, opts) {
+                    confetti(Object.assign({}, defaults, opts, {
+                        particleCount: Math.floor(count * particleRatio)
+                    }));
+                }
+                fire(0.25, { spread: 26, startVelocity: 55 });
+                fire(0.2, { spread: 60 });
+                fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+                fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+                fire(0.1, { spread: 120, startVelocity: 45 });
+
+                setTimeout(() => {
+                    document.getElementById('section-kado').classList.add('hidden');
+                    document.getElementById('main-page').classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                }, 600);
+            }
+        }
+
+        function goyangFoto(el) {
+            el.classList.add('shake');
+            const cap = el.querySelector('.caption');
+            cap.style.display = 'block';
+            setTimeout(() => el.classList.remove('shake'), 500);
+        }
+
+        function handleLilin() {
+            const btn = document.getElementById('btn-action');
+            if (btn.innerText.includes("Tiup")) {
+                const flames = document.querySelectorAll('.flame');
+                flames.forEach(f => f.style.display = 'none');
+                confetti({ particleCount: 200, spread: 100, origin: { y: 0.8 } });
+                document.getElementById('wish-text').innerText = "Lilin sudah ditiup! 🥳";
+                btn.innerText = "Baca Kartu Ucapan ❤️";
+            } else {
+                document.getElementById('section-surat').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
